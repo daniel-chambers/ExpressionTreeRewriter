@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DigitallyCreated.ExpressionTreeRewriter</id>
+    <version>1.0.0</version>
+    <title>Expression Tree Rewriter</title>
+    <authors>Daniel Chambers &amp; Contributors</authors>
+    <owners>Daniel Chambers &amp; Contributors</owners>
+    <licenseUrl>https://github.com/daniel-chambers/ExpressionTreeRewriter/blob/master/LICENCE.txt</licenseUrl>
+    <projectUrl>https://github.com/daniel-chambers/ExpressionTreeRewriter</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A small utility library that allows the rewriting of expression trees using methods as marker points for the rewriting process.</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>expression-trees linq c# csharp</tags>
+  </metadata>
+</package>
