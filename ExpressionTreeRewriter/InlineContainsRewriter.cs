@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace DigitallyCreated.ExpressionTreeRewriter
@@ -16,24 +17,32 @@ namespace DigitallyCreated.ExpressionTreeRewriter
         {
             var collectionExpr = methodCallExpression.Arguments[0];
             var itemExpr = methodCallExpression.Arguments[1];
-            var enumContainsType = methodCallExpression.Method.GetParameters()[1].ParameterType;
+            var collectionContainsType = methodCallExpression.Method.GetParameters()[1].ParameterType;
 
-            var values = GetCollectionValues(collectionExpr);
-            return BuildBinaryExpression(values, itemExpr, enumContainsType);
+            var values = GetCollectionValues(collectionExpr, collectionContainsType);
+            return BuildBinaryExpression(values, itemExpr, collectionContainsType);
         }
 
-        private static IEnumerable<object> GetCollectionValues(Expression collectionExpr)
+        private static IEnumerable<object> GetCollectionValues(Expression collectionExpr, Type collectionContainsType)
         {
-            return Expression.Lambda<Func<IEnumerable<object>>>(collectionExpr).Compile()();
+            var expr = collectionExpr;
+
+            if (collectionContainsType.IsValueType)
+            {
+                var castMethod = typeof(Enumerable).GetMethod("Cast").MakeGenericMethod(typeof(object));
+                expr = Expression.Call(castMethod, expr);
+            }
+
+            return Expression.Lambda<Func<IEnumerable<object>>>(expr).Compile()();
         }
 
-        private static Expression BuildBinaryExpression(IEnumerable<object> values, Expression itemExpr, Type enumContainsType)
+        private static Expression BuildBinaryExpression(IEnumerable<object> values, Expression itemExpr, Type collectionContainsType)
         {
             Expression binaryExpressionTree = null;
 
             foreach (var item in values)
             {
-                var constant = Expression.Constant(item, enumContainsType);
+                var constant = Expression.Constant(item, collectionContainsType);
                 var comparison = Expression.Equal(itemExpr, constant);
 
                 binaryExpressionTree = binaryExpressionTree == null 
