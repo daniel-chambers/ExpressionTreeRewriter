@@ -40,6 +40,16 @@ namespace DigitallyCreated.ExpressionTreeRewriter
             return new TreeVisitor().Visit(expression);
         }
 
+        /// <summary>
+        /// Rewrites an arbitrary expression tree
+        /// </summary>
+        /// <param name="expression">The expression tree to rewrite</param>
+        /// <returns>The rewritten expression tree</returns>
+        public static Expression<T> Rewrite<T>(Expression<T> expression)
+        {
+            return (Expression<T>)new TreeVisitor().Visit(expression);
+        }
+
 
         /// <summary>
         /// An <see cref="ExpressionVisitor"/> that rewrites all marker method calls with their replacement
