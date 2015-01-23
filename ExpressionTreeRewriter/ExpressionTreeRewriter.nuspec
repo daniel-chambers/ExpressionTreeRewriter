@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitallyCreated.ExpressionTreeRewriter</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>Expression Tree Rewriter</title>
     <authors>Daniel Chambers &amp; Contributors</authors>
     <owners>Daniel Chambers &amp; Contributors</owners>
@@ -10,7 +10,9 @@
     <projectUrl>https://github.com/daniel-chambers/ExpressionTreeRewriter</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A small utility library that allows the rewriting of expression trees using methods as marker points for the rewriting process.</description>
-    <releaseNotes>Fixed bug in InlineContains where T was a value type.</releaseNotes>
+    <releaseNotes>- Added InlineMaybe marker method for easier null-checking in queries
+- Fixed a bug where you could not inline a lambda where a parameter to the marker method was an expression and not another parameter
+- Fixed crash that could be caused by trying to inline an expression that uses a static method in it.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>expression-trees linq c# csharp</tags>
   </metadata>
