@@ -45,6 +45,7 @@
     <Compile Include="ExpressionTreeRewriter.cs" />
     <Compile Include="IExpressionRewriter.cs" />
     <Compile Include="InlineContainsRewriter.cs" />
+    <Compile Include="InlineMaybeRewriter.cs" />
     <Compile Include="LambdaInlinerRewriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RewriterMarkerMethodAttribute.cs" />
