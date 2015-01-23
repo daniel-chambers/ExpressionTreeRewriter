@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using DigitallyCreated.ExpressionTreeRewriter;
 using Xunit;
 using Xunit.Should;
 
-namespace ExpressionTreeRewriter.Tests
+namespace DigitallyCreated.ExpressionTreeRewriter.Tests
 {
     public class RecursiveRewriteFacts
     {

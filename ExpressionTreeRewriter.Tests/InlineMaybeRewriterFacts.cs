@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using DigitallyCreated.ExpressionTreeRewriter;
 using Xunit;
 using Xunit.Should;
 
-namespace ExpressionTreeRewriter.Tests
+namespace DigitallyCreated.ExpressionTreeRewriter.Tests
 {
     public class InlineMaybeRewriterFacts
     {

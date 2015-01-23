@@ -7,8 +7,8 @@
     <ProjectGuid>{8B9BD8E9-3D1C-478D-A47C-DF6141253F60}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExpressionTreeRewriter.Tests</RootNamespace>
-    <AssemblyName>ExpressionTreeRewriter.Tests</AssemblyName>
+    <RootNamespace>DigitallyCreated.ExpressionTreeRewriter.Tests</RootNamespace>
+    <AssemblyName>DigitallyCreated.ExpressionTreeRewriter.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
