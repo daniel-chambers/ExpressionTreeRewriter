@@ -45,7 +45,7 @@ namespace DigitallyCreated.ExpressionTreeRewriter
 				replacements.Add(_treeToInline.Parameters[i], methodCallExpression.Arguments[i]);
 			}
 
-			return ((LambdaExpression)new ExpressionReplacerVisitor(replacements).Visit(_treeToInline)).Body;
+			return new ExpressionReplacerVisitor(replacements).Visit(_treeToInline.Body);
 		}
 	}
 }

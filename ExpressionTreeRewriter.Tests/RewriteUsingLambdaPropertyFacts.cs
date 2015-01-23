@@ -53,6 +53,18 @@ namespace ExpressionTreeRewriter.Tests
             results[0].ShouldBe(_data[1]);
         }
 
+        [Fact]
+        public void InlinesMethodWhereTheParameterIsAnExpressionAndNotAnotherParameter()
+        {
+            var results = _data.AsQueryable()
+                .Where(d => IsDarth(d.Key))
+                .Rewrite()
+                .ToList();
+
+            results.Count.ShouldBe(1);
+            results[0].ShouldBe(_data[0]);
+        }
+
         public static Expression<Func<string[]>> MyStringArray
         {
             get { return () => new[] { "Leia", "Chewbacca", "Luke" }; }
@@ -82,6 +94,17 @@ namespace ExpressionTreeRewriter.Tests
 
         [RewriteUsingLambdaProperty(typeof(RewriteUsingLambdaPropertyFacts), "IsLukeUsingStaticMethodExpr")]
         private static bool IsLukeUsingStaticMethod(KeyValuePair<string, string> kvp)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Expression<Func<string, bool>> IsDarthExpr
+        {
+            get { return n => n == "Darth"; }
+        }
+
+        [RewriteUsingLambdaProperty(typeof(RewriteUsingLambdaPropertyFacts), "IsDarthExpr")]
+        private static bool IsDarth(string n)
         {
             throw new NotImplementedException();
         }
