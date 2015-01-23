@@ -41,6 +41,18 @@ namespace ExpressionTreeRewriter.Tests
             results[0].ShouldBe(_data[1]);
         }
 
+        [Fact]
+        public void InlinesMethodsThatContainStaticMethodCalls()
+        {
+            var results = _data.AsQueryable()
+                .Where(d => IsLukeUsingStaticMethod(d))
+                .Rewrite()
+                .ToList();
+
+            results.Count.ShouldBe(1);
+            results[0].ShouldBe(_data[1]);
+        }
+
         public static Expression<Func<string[]>> MyStringArray
         {
             get { return () => new[] { "Leia", "Chewbacca", "Luke" }; }
@@ -59,6 +71,17 @@ namespace ExpressionTreeRewriter.Tests
 
         [RewriteUsingLambdaProperty(typeof(RewriteUsingLambdaPropertyFacts), "IsLukeExpr")]
         private static bool IsLuke(KeyValuePair<string, string> kvp)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Expression<Func<KeyValuePair<string, string>, bool>> IsLukeUsingStaticMethodExpr
+        {
+            get { return kvp => String.Join(" ", kvp.Key, kvp.Value) == "Luke Skywalker"; }
+        }
+
+        [RewriteUsingLambdaProperty(typeof(RewriteUsingLambdaPropertyFacts), "IsLukeUsingStaticMethodExpr")]
+        private static bool IsLukeUsingStaticMethod(KeyValuePair<string, string> kvp)
         {
             throw new NotImplementedException();
         }

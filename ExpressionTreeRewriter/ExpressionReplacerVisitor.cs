@@ -35,6 +35,9 @@ namespace DigitallyCreated.ExpressionTreeRewriter
 		/// </returns>
 		public override Expression Visit(Expression node)
 		{
+		    if (node == null)
+		        return null;
+
 			if (_replacementExpressions.ContainsKey(node))
 				return Visit(_replacementExpressions[node]);
 
