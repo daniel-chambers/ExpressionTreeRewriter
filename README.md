@@ -74,6 +74,32 @@ This is effectively rewritten into:
 .Where(person => person.FirstName == "Luke" && person.LastName == "Skywalker")
 ```
 
+### InlineMaybe
+You may want to test for nulls in your queries, but unfortunately your queries quickly start getting polluted with verbose ternary expressions like this:
+
+```c#
+var results = _data.AsQueryable()
+  .Select(x => new {
+    Name = x.Name,
+    ParentName = x.Parent != null 
+      ? x.Parent.Name 
+      : null
+  })
+  .ToList();
+```
+
+Now you can use the InlineMaybe method instead, which will be inlined to the above ternary form when you rewrite the query.
+
+```c#
+var results = _data.AsQueryable()
+  .Select(x => new {
+    Name = x.Name,
+    ParentName = x.Parent.InlineMaybe(p => p.Name)
+  })
+  .Rewrite()
+  .ToList();
+```
+
 ## More Information
 This library is based on the concepts and classes discussed in [this blog post][1].
 
